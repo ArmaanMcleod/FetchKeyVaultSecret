@@ -10,6 +10,11 @@ namespace FetchKeyVaultSecret
     {
         public static async Task Main(string[] args)
         {
+            if (!File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json")))
+            {
+                throw new FileNotFoundException("appsettings.json not found in current solution");
+            }
+
             // Load in configuration settings from config file
             var configurationBuilder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
